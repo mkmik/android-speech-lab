@@ -9,12 +9,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
-      - name: Install SDK
+      - name: Install SDK packages
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - name: Build debug APK
         run: gradle --no-daemon assembleDebug
       - uses: actions/upload-artifact@v4
+        if: success()
         with:
           name: speech-lab-debug-apk
           path: app/build/outputs/apk/debug/*.apk
